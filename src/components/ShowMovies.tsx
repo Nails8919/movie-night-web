@@ -6,8 +6,8 @@ interface MovieType {
     title: string
     director: string
     genres: string[]
-    releaseDate: string
-    rating: number
+    year: number
+    runtime: number
     poster: string
 }
 
@@ -28,8 +28,9 @@ const ShowMovies = () => {
         const searchTerm = event.target.value.toLowerCase()
         setFilteredMovies(
             allMovies?.filter((movie) => {
+                console.log(searchTerm, movie)
                 if (movie.title.toLowerCase().includes(searchTerm) ||
-                    movie.director.toLowerCase().includes(searchTerm) ||
+                    // movie.director.toLowerCase().includes(searchTerm) ||
                     // movie.genres.toLowerCase().includes(searchTerm)
                     movie.genres.some((genre) => genre.toLowerCase().includes(searchTerm))
                 ) {
@@ -41,6 +42,7 @@ const ShowMovies = () => {
 
     useEffect(() => {
         const getMoviesUrl = `http://localhost:4040/movie/p${page}`
+        const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
         //  http://localhost:4040/movie/p6
         fetch(getMoviesUrl, {
             headers: {
@@ -57,7 +59,7 @@ const ShowMovies = () => {
     return (
         <>
             <div className="flex flex-col items-center">
-                <div className="mb-4 border-b-2 text-center text-xl font-bold">MOVIES LIST</div>
+                <div className="mb-4 border-b-2 text-center text-xl font-bold">MOVIES</div>
                 <input
                     type="text"
                     placeholder="Search by title, director, or genre"

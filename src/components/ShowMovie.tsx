@@ -5,7 +5,7 @@ interface MovieType {
   title: string,
   director: string,
   genres: string[],
-  releaseDate: string,
+  year: number,
   runtime: number
   poster: string
 
@@ -13,19 +13,20 @@ interface MovieType {
 
 const ShowMovie = ({ movie }: { movie: MovieType }) => {
   console.log(movie)
-  
   return (
     <>
     {/* <Link to={`/transactions/${customer._id}`}> */}
-      <div key={movie._id} className="mb-4 p-4 border rounded shadow bg-white hover:bg-gray-150 w-100">
-        <p>Title: {movie.title}</p>
-        <p>Director: {movie.director}</p>
-        <div>
-          <p>Genres: {movie.genres?.join(', ')}</p>
+      <div key={movie._id} className="mb-4 p-4 border rounded shadow bg-gray-100 hover:bg-gray-250 w-100 h-115">
+        <div className="flex justify-center mb-2">
+        <div><img src={movie.poster} alt={`${movie.title} poster`} className="w-55 h-auto" /></div>
         </div>
-        <p>Release Date: {movie.releaseDate}</p>
-        <p>Runtime: {movie.runtime} minutes</p>
-        <p>Poster: <img src={movie.poster} alt={`${movie.title} poster`} className="w-32 h-auto" /></p>
+        <p>{`${movie.title} (${movie.year})`}</p>
+        <p>{movie.director}</p>
+        <div>
+          <p>{movie.genres?.join(', ')}</p>
+        </div>
+        {/* <p>{movie.releaseDate}</p> */}
+        <p>{movie.runtime}</p>
         {/* <p>ID: {movie._id}</p> */}
       </div>
     {/* </Link> */}
