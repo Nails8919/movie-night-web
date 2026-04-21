@@ -1,13 +1,13 @@
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
-    const Navbar = () => {
-        return (
-          <>
-          <div>Navbar</div>
-          <Link className="mx-4 underline" to="/">Home</Link>
-          <Link className="mx-4 underline" to="/movies">Movies</Link>
-          </>
-        )
-      }
-      
-      export default Navbar
+const Navbar = () => {
+  return (
+    <>
+      <div>Navbar</div>
+      <Link className="mx-4 underline" to="/">Home</Link>
+      <Link className="mx-4 underline" to="/movies">Movies</Link>
+    </>
+  )
+}
+
+export default Navbar
