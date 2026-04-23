@@ -15,6 +15,7 @@ const ShowMovies = () => {
     const [allMovies, setAllMovies] = useState<MovieType[]>([])
     const [filteredMovies, setFilteredMovies] = useState<MovieType[]>([])
     const [page, setPage] = useState(1)
+    const [selectedGenre, setSelectedGenre] = useState('all')
 
     const handlePageNext = () => {
         setPage((currentPage) => currentPage + 1)
@@ -35,14 +36,28 @@ const ShowMovies = () => {
                     movie.genres.some((genre) => genre.toLowerCase().includes(searchTerm))
                 ) {
                     return movie
-            }
+                }
             }),
         )
     }
 
+    
+const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const genre = event.target.value
+    setSelectedGenre(genre)
+
+    setFilteredMovies(
+        allMovies.filter(movie =>
+            genre === 'all' ? true : movie.genres.includes(genre)
+        )
+    )
+}
+
+    
+
     useEffect(() => {
         const getMoviesUrl = `http://localhost:4040/movie/p${page}`
-        const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
+        // const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
         //  http://localhost:4040/movie/p6
         fetch(getMoviesUrl, {
             headers: {
@@ -66,6 +81,16 @@ const ShowMovies = () => {
                     className="mb-4 w-full rounded-lg border p-2"
                     onChange={handleSearch}
                 />
+                <select
+                    value={selectedGenre}
+                    onChange={handleGenreChange}
+                    className="mb-4 w-full rounded-lg border p-2"
+                >
+                    <option value="all">All Genres</option>
+                    {Array.from(new Set(allMovies.flatMap(m => m.genres))).map(genre => (
+                        <option key={genre} value={genre}>{genre}</option>
+                    ))}
+                </select>
             </div>
             <div className="grid grid-cols-3 items-center border-b-2 p-4 text-center text-xl font-bold">
                 {filteredMovies.length > 0 ? (
