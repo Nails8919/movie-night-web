@@ -1,4 +1,4 @@
-import ShowMovie from "./ShowMovie"
+// import ShowMovie from "./ShowMovie"
 
 
 const HomePage = () => {
@@ -10,7 +10,7 @@ const HomePage = () => {
     </div>
     <div>
       Featured Movies
-      <ShowMovie movie  />
+      {/* <ShowMovie movie={MovieType} /> */}
     </div>
   </>
   )
