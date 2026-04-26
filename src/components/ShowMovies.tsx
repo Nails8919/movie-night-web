@@ -11,7 +11,11 @@ interface MovieType {
     poster: string
 }
 
-const ShowMovies = () => {
+interface ShowMoviesProps {
+    contentType: 'movies' | 'series' | 'all'
+  }
+
+const ShowMovies = ({ contentType }: ShowMoviesProps) => {
     const [allMovies, setAllMovies] = useState<MovieType[]>([])
     const [filteredMovies, setFilteredMovies] = useState<MovieType[]>([])
     const [page, setPage] = useState(1)
@@ -56,20 +60,44 @@ const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
     
 
     useEffect(() => {
-        const getMoviesUrl = `http://localhost:4040/movie/p${page}`
-        // const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
-        //  http://localhost:4040/movie/p6
-        fetch(getMoviesUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data: MovieType[]) => {
-                setAllMovies(data)
-                setFilteredMovies(data)
-            })
-    }, [page])
+        const fetchData = async () => {
+            let data: MovieType[] = []
+
+            if (contentType === 'movies' || contentType === 'all') {
+                const movies = await fetch(
+                  `http://localhost:4040/movie/p${page}`
+                ).then(res => res.json())
+                data = [...data, ...movies]
+              }
+          
+              if (contentType === 'series' || contentType === 'all') {
+                const series = await fetch(
+                  `http://localhost:4040/series/p${page}`
+                ).then(res => res.json())
+                data = [...data, ...series]
+              }
+          
+              setAllMovies(data)
+              setFilteredMovies(data)
+            }
+          
+            fetchData()
+          }, [page, contentType])
+          
+    //     const getMoviesUrl = `http://localhost:4040/movie/p${page}`
+    //     // const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
+    //     //  http://localhost:4040/movie/p6
+    //     fetch(getMoviesUrl, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data: MovieType[]) => {
+    //             setAllMovies(data)
+    //             setFilteredMovies(data)
+    //         })
+    // }, [page])
 
     return (
         <>
