@@ -1,14 +1,18 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
-interface NavbarProps {
-  contentType: 'movies' | 'series' | 'all'
-  setContentType: React.Dispatch<
-    React.SetStateAction<'movies' | 'series' | 'all'>
-  >
-}
+// interface NavbarProps {
+//   contentType: 'movies' | 'series' | 'all'
+//   setContentType: React.Dispatch<
+//     React.SetStateAction<'movies' | 'series' | 'all'>
+//   >
+// }
 
-const Navbar = ({ contentType, setContentType }: NavbarProps) => {
+const Navbar = () => {
+  const [contentType, setContentType] =
+    useState<'movies' | 'series' | 'all'>('all')
+  // const Navbar = ({ contentType, setContentType }: NavbarProps) => {
   return (
     <>
       <div>
@@ -26,8 +30,8 @@ const Navbar = ({ contentType, setContentType }: NavbarProps) => {
           <option value="movies">Movies</option>
           <option value="series">Series</option>
         </select>
-        
-      {/* <Link className="mx-4 underline" to="/movies">Movies</Link>
+
+        {/* <Link className="mx-4 underline" to="/movies">Movies</Link>
       <Link className="mx-4 underline" to="/Tv Shows">TV Shows</Link>
       <Link className="mx-4 underline" to="/myfave">My Faves</Link> */}
       </div>
