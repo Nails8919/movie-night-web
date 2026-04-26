@@ -74,7 +74,7 @@ const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
     return (
         <>
             <div className="flex flex-col items-center">
-                <div className="mb-4 border-b-2 text-center text-xl font-bold">MOVIES</div>
+                <div className="mb-4 border-b-2 text-center text-xl font-bold">MOVIE NIGHT</div>
                 <input
                     type="text"
                     placeholder="Search by title, director, or genre"

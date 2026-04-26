@@ -8,9 +8,10 @@ import NotFound from "./components/NotFound"
 const App = () => {
   return (
     <>
-    <Navbar  contentType={contentType} setContentType={setContentType} />
-      <ShowMovies contentType={contentType} />
- />
+    <Navbar  />
+    {/* <Navbar  contentType={contentType} setContentType={setContentType} />
+      <ShowMovies contentType={contentType} /> */}
+
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/movies" element={<ShowMovies />} />
