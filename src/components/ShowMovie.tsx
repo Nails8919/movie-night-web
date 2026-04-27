@@ -1,5 +1,5 @@
 
-
+//interface for defining the fields of the query result for movie type.
 interface MovieType {
   _id: string,
   title: string,
@@ -11,6 +11,7 @@ interface MovieType {
 
 }
 
+//functional component for how the movie infomation is displayed on the front-end.
 const ShowMovie = ({ movie }: { movie: MovieType }) => {
   console.log(movie)
   return (
@@ -32,8 +33,6 @@ const ShowMovie = ({ movie }: { movie: MovieType }) => {
     {/* </Link> */}
     </>
   )
-
-  
 }
 
 //exportation of ShowMovie component for use in other parts of the application.

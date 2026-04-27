@@ -9,11 +9,11 @@ interface mediaType {
     year: number
     runtime: number
     poster: string
-    seasons?: number
-    episodes?: number
+    seasons: number
+    episodes: number
 }
 
-//Showseries component, which takes in a series object and displays its information in a card format, similar to ShowMovie but with optional fields for seasons and episodes.
+//ShowSeries function, which formats the series information for display.
 const ShowSeries = ({ series }: { series: mediaType }) => {
   return (
     <div key={series._id} className="mb-4 p-4 border rounded shadow bg-gray-100 hover:bg-gray-250 w-100 h-115">
@@ -28,6 +28,7 @@ const ShowSeries = ({ series }: { series: mediaType }) => {
         {/* <p>{series.releaseDate}</p> */}
         <p>{series.runtime}</p>
         {/* <p>ID: {series._id}</p> */}
+        <p>{`${series.seasons} Seasons, Episodes: ${series.episodes}`}</p>
       </div>
     )
 }

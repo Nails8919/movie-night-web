@@ -30,7 +30,7 @@ const ShowMovies = () => {
     const handlePagePrev = () => {
         setPage((currentPage) => Math.max(1, currentPage - 1))
     }
-    //search handler, filters movies based on search term matching title, director, or genres.
+    //function for handling the filtering and searching of movies.
     const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
         const searchTerm = event.target.value.toLowerCase()
         setFilteredMovies(
@@ -45,7 +45,7 @@ const ShowMovies = () => {
         )
     }
 
-    //genre filter handler, filters movies based on selected genre from dropdown, with "all" option to show all media types.
+    //function for handling the filtering of movies by genre.
     const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const genre = event.target.value
         setSelectedGenre(genre)
@@ -88,47 +88,52 @@ const ShowMovies = () => {
     // code for the input movie search and genre filter, as well as the pagination buttons and dropdown for movies/series/all
     return (
         <>
-            <div className="flex flex-col items-center">
-                <div className="mb-4 border-b-2 text-center text-xl font-bold"></div>
-                {/* search input for movies */}
-                <input
-                    type="text"
-                    placeholder="Search by title, director, or genre"
-                    className="mb-4 w-full rounded-lg border p-2"
-                    onChange={handleSearch}
-                />
-                {/* genre filter dropdown */}
-                <select
-                    value={selectedGenre}
-                    onChange={handleGenreChange}
-                    className="mb-4 w-full rounded-lg border p-2"
-                >
-                    {/* dropdown options for genres, with "all" option to show all media types. */}
-                    <option value="all">All Genres</option>
-                    {Array.from(new Set(allMovies.flatMap(m => m.genres))).map(genre => (
-                        <option key={genre} value={genre}>{genre}</option>
-                    ))}
-                </select>
+            <div className="flex flex-col items-center justify-center text-center text-xl font-bold">
+                <div className="border-b-2 text-center text-xl font-bold flex justify-center p-4 bg-green-200 w-full gap-4">
+                    <div>
+                        {/* search input for movies */}
+                        <input
+                            type="text"
+                            placeholder="Search by title, director, or genre"
+                            className="w-96 rounded-lg border p-2"
+                            onChange={handleSearch}
+                        />
+                    </div>
 
-                {/* dropdown for selecting content type (movies, series, or all) */}
-                <select
-                    value={contentType}
-                    onChange={(e) => {
-                        // @ts-ignore
-                        setContentType(e.target.value)
-                    }}
-                    className="mb-4 w-full rounded-lg border p-2"
-                >
-                    {/* dropdown options for movies, series, or all */}
-                    <option value="all">All</option>
-                    <option value="movies">Movies</option>
-                    <option value="series">Series</option>
-                </select>
+                    {/* genre filter dropdown */}
+                    <select
+                        value={contentType}
+                        onChange={(e) => {
+                            // @ts-ignore
+                            setContentType(e.target.value)
+                        }}
+                        className="mb-4 w-32 rounded-lg border p-2"
+                    >
+                        {/* dropdown options for movies, series, or all */}
+                        <option value="all">All</option>
+                        <option value="movies">Movies</option>
+                        <option value="series">Series</option>
+                    </select>
+
+                    {/* dropdown for selecting content type (movies, series, or all) */}
+                    <select
+                        value={selectedGenre}
+                        onChange={handleGenreChange}
+                        className="mb-4 w-32 flex justify-between rounded-lg border p-2"
+                    >
+                        {/* dropdown options for genres, with "all" option to show all media types. */}
+                        <option value="all">All Genres</option>
+                        {Array.from(new Set(allMovies.flatMap(m => m.genres))).map(genre => (
+                            <option key={genre} value={genre}>{genre}</option>
+                        ))}
+                    </select>
+                </div>
+
 
             </div>
 
             {/* grid layout for displaying movies, with conditional rendering to show "No movies found" if there are no filtered movies. */}
-            <div className="grid grid-cols-3 items-center border-b-2 p-4 text-center text-xl font-bold">
+            <div className="grid grid-cols-3 items-center border-b-2 p-4 bg-sky-800 text-center text-xl font-bold">
                 {filteredMovies.length > 0 ? (
                     filteredMovies.map((movie) => <ShowMovie key={movie._id} movie={movie} />)
                 ) : (
