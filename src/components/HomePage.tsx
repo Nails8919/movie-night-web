@@ -1,6 +1,8 @@
 // import ShowMovie from "./ShowMovie"
 
+// import ShowMovie from "./ShowMovie"
 
+// HomePage component, which serves as the landing page of the application, welcoming users and providing a brief introduction to the site.
 const HomePage = () => {
   return (
   <>
@@ -10,10 +12,13 @@ const HomePage = () => {
     </div>
     <div>
       Featured Movies
-      {/* <ShowMovie movie={MovieType} /> */}
+      <div className="flex flex-wrap justify-center">
+      </div>
+      {/* Additional content can be added here */}
     </div>
   </>
   )
 }
 
+//exportation of HomePage component for use in other parts of the application.
 export default HomePage

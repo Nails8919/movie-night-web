@@ -36,4 +36,5 @@ const ShowMovie = ({ movie }: { movie: MovieType }) => {
   
 }
 
+//exportation of ShowMovie component for use in other parts of the application.
 export default ShowMovie

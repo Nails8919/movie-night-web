@@ -1,5 +1,6 @@
 // import React from 'react'
 
+// interface for media type, which includes the fields that are needed for the front-end.
 interface mediaType {
     _id: string
     title: string
@@ -12,6 +13,7 @@ interface mediaType {
     episodes?: number
 }
 
+//Showseries component, which takes in a series object and displays its information in a card format, similar to ShowMovie but with optional fields for seasons and episodes.
 const ShowSeries = ({ series }: { series: mediaType }) => {
   return (
     <div key={series._id} className="mb-4 p-4 border rounded shadow bg-gray-100 hover:bg-gray-250 w-100 h-115">
@@ -30,4 +32,5 @@ const ShowSeries = ({ series }: { series: mediaType }) => {
     )
 }
 
+//exportation of ShowSeries component for use in other parts of the application.
 export default ShowSeries

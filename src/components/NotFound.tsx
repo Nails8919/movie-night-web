@@ -4,4 +4,5 @@ const NotFound = () => {
   )
 }
 
+//exportation of NotFound component for use in other parts of the application.
 export default NotFound
