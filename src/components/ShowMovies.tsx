@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from 'react'
 import ShowMovie from './ShowMovie'
 
-interface MovieType {
+interface mediaType {
     _id: string
     title: string
     director: string
@@ -10,12 +10,14 @@ interface MovieType {
     runtime: number
     poster: string
 }
+type ContentType = 'movies' | 'series' | 'all'
 
 const ShowMovies = () => {
-    const [allMovies, setAllMovies] = useState<MovieType[]>([])
-    const [filteredMovies, setFilteredMovies] = useState<MovieType[]>([])
+    const [allMovies, setAllMovies] = useState<mediaType[]>([])
+    const [filteredMovies, setFilteredMovies] = useState<mediaType[]>([])
     const [page, setPage] = useState(1)
     const [selectedGenre, setSelectedGenre] = useState('all')
+    const [contentType, setContentType] = useState<ContentType>('movies')
 
     const handlePageNext = () => {
         setPage((currentPage) => currentPage + 1)
@@ -52,29 +54,54 @@ const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
         )
     )
 }
+ 
 
-    
 
     useEffect(() => {
-        const getMoviesUrl = `http://localhost:4040/movie/p${page}`
-        // const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
-        //  http://localhost:4040/movie/p6
-        fetch(getMoviesUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data: MovieType[]) => {
-                setAllMovies(data)
-                setFilteredMovies(data)
-            })
-    }, [page])
+        const fetchData = async () => {
+            let data: mediaType[] = []
+        
+            if (contentType === 'movies' || contentType === 'all') {
+              const movies = await fetch(
+                `http://localhost:4040/movie/p${page}`
+              ).then(res => res.json())
+        
+              data = [...data, ...movies]
+            }
+        
+            if (contentType === 'series' || contentType === 'all') {
+              const series = await fetch(
+                `http://localhost:4040/series/p${page}`
+              ).then(res => res.json())
+        
+              data = [...data, ...series]
+            }
+        
+            setAllMovies(data)
+            setFilteredMovies(data)
+          }
+        
+          fetchData()
+        }, [page, contentType])
+    //     const getMoviesUrl = `http://localhost:4040/movie/p${page}`
+    //     // const getMoviesUrl2 = `http://localhost:4040/series/p${page}`
+    //     //  http://localhost:4040/movie/p6
+    //     fetch(getMoviesUrl, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data: MovieType[]) => {
+    //             setAllMovies(data)
+    //             setFilteredMovies(data)
+    //         })
+    // }, [page])
 
     return (
         <>
             <div className="flex flex-col items-center">
-                <div className="mb-4 border-b-2 text-center text-xl font-bold">MOVIES</div>
+                <div className="mb-4 border-b-2 text-center text-xl font-bold"></div>
                 <input
                     type="text"
                     placeholder="Search by title, director, or genre"
@@ -91,6 +118,20 @@ const handleGenreChange = (event: ChangeEvent<HTMLSelectElement>) => {
                         <option key={genre} value={genre}>{genre}</option>
                     ))}
                 </select>
+
+<select
+    value={contentType}
+    onChange={(e) => {
+        // @ts-ignore
+        setContentType(e.target.value)
+    }}
+    className="mb-4 w-full rounded-lg border p-2"
+>
+    <option value="all">All</option>
+    <option value="movies">Movies</option>
+    <option value="series">Series</option>
+</select>
+
             </div>
             <div className="grid grid-cols-3 items-center border-b-2 p-4 text-center text-xl font-bold">
                 {filteredMovies.length > 0 ? (
