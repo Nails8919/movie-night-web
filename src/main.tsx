@@ -7,7 +7,7 @@ import ShowDetails from './components/ShowDetails.tsx'
 import ShowMovies from './components/ShowMovies.tsx'
 import NavBar from './components/NavBar.tsx'
 import NotFound from './components/NotFound.tsx'
-// import NavBar from './components/NavBar.tsx'
+import Favorites from './components/Favorites.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<ShowMovies />} />
         <Route path="/movie/:id" element={<ShowDetails />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
 
       {/* <App /> */}

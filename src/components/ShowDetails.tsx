@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const ShowDetails = () => {
     const { id } = useParams()
     const [movie, setMovie] = useState<any>(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`http://localhost:4040/info/${id}`)
@@ -29,6 +31,7 @@ const ShowDetails = () => {
             <button
                 className="mt-4 bg-blue-500 text-white p-2 rounded cursor-pointer"
                 onClick={() => {
+                    navigate("/favorites")
                     fetch(`http://localhost:4040/favorites/add/${id}`, {
                         method: "POST"
                     })
