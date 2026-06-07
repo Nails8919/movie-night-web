@@ -9,6 +9,7 @@ import NavBar from './components/NavBar.tsx'
 import NotFound from './components/NotFound.tsx'
 import Favorites from './components/Favorites.tsx'
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <NavBar />

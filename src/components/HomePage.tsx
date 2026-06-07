@@ -11,7 +11,7 @@ const HomePage = () => {
       <p className="text-lg font-normal">Your ultimate destination for discovering and enjoying movies!</p>
     </div>
     <div>
-      Featured Movies
+
       <div className="flex flex-wrap justify-center">
       </div>
       {/* Additional content can be added here */}

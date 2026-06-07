@@ -1,6 +1,7 @@
 //libraries and imports.
 import { useEffect, useState, type ChangeEvent } from 'react'
 import ShowMovie from './ShowMovie'
+import { Link } from 'react-router-dom'
 
 // interface for media type, which includes the fields that are needed for the front-end.
 interface mediaType {
@@ -90,8 +91,15 @@ const ShowMovies = () => {
         <>
             <div className="flex flex-col items-center justify-center text-center text-xl font-bold">
                 <div className="border-b-2 text-center text-xl font-bold flex justify-center p-4 bg-green-200 w-full gap-4">
-                    <div>
+                    <div className="flex gap-2">
                         {/* search input for movies */}
+                    <Link
+                        to="/favorites"
+                        className="border text-black px-2 py-2 rounded"
+                    >
+                        My Favorites
+                    </Link>
+
                         <input
                             type="text"
                             placeholder="Search by title, director, or genre"
@@ -114,6 +122,7 @@ const ShowMovies = () => {
                         <option value="movies">Movies</option>
                         <option value="series">Series</option>
                     </select>
+
 
                     {/* dropdown for selecting content type (movies, series, or all) */}
                     <select
