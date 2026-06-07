@@ -92,6 +92,7 @@ const ShowMovies = () => {
             <div className="flex flex-col items-center justify-center text-center text-xl font-bold">
                 <div className="border-b-2 text-center text-xl font-bold flex justify-center p-4 bg-green-200 w-full gap-4">
                     <div className="flex gap-2">
+                        
                         {/* search input for movies */}
                     <Link
                         to="/favorites"
@@ -123,7 +124,6 @@ const ShowMovies = () => {
                         <option value="series">Series</option>
                     </select>
 
-
                     {/* dropdown for selecting content type (movies, series, or all) */}
                     <select
                         value={selectedGenre}
@@ -137,8 +137,6 @@ const ShowMovies = () => {
                         ))}
                     </select>
                 </div>
-
-
             </div>
 
             {/* grid layout for displaying movies, with conditional rendering to show "No movies found" if there are no filtered movies. */}

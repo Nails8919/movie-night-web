@@ -1,4 +1,3 @@
-// import React from 'react'
 
 // interface for media type, which includes the fields that are needed for the front-end.
 interface mediaType {
@@ -25,9 +24,7 @@ const ShowSeries = ({ series }: { series: mediaType }) => {
         <div>
           <p>{series.genres?.join(', ')}</p>
         </div>
-        {/* <p>{series.releaseDate}</p> */}
         <p>{series.runtime}</p>
-        {/* <p>ID: {series._id}</p> */}
         <p>{`${series.seasons} Seasons, Episodes: ${series.episodes}`}</p>
       </div>
     )
